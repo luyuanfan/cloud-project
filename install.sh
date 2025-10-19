@@ -24,9 +24,9 @@ if [ ! -d "omnetpp-${OMNET_VERSION}" ]; then
 fi
 cd omnetpp-${OMNET_VERSION}
 . setenv
-sed 's/WITH_TKENV=yes/WITH_TKENV=no/' configure.user
-sed 's/WITH_QTENV=yes/WITH_QTENV=no/' configure.user
-sed 's/WITH_OSG=yes/WITH_OSG=no/' configure.user
+sed -i 's/WITH_TKENV=yes/WITH_TKENV=no/' configure.user
+sed -i 's/WITH_QTENV=yes/WITH_QTENV=no/' configure.user
+sed -i 's/WITH_OSG=yes/WITH_OSG=no/' configure.user
 ./configure
 make -j $(nproc)
 
@@ -62,7 +62,6 @@ cd ../inet-quic
 make makefiles
 make -j $(nproc)
 
-# Go back to project root folder
 cd $PROJECT_ROOT
 
-echo "All installation is complete"
+echo "All installation complete"
