@@ -23,13 +23,19 @@ We chose QUIC because:
 
 ## pFabric: minimal near-optimal datacenter transport
 
-`TODO`
+Extensive research has been done in TCP scheduling that takes in consideration of shorter v.s. longer flows. 
+
+The paper points out that short flows in data centers are extremely latency-sensitive, yet in traditional TCP-based data center, they suffer from high completion times because they get queued behind large background flows.
+
+pFabric’s key contribution is a near-optimal transport design: It assigns each flow a priority value (typically based on remaining flow size or deadline), which is inserted into every packet header. In this set up:
+- Switches maintain very small buffers and always serve the highest-priority packets first. If the buffer becomes full, they drop the lowest-priority packet.
+- End-hosts start sending at full rate and only back off if persistent packet loss occurs. 
+
+We take inspiration from assigning priorities to packets and want to bring this idea to TCP’s newer counterpart — QUIC.
 
 ## Exploiting stream scheduling in QUIC: Performance assessment over wireless connectivity scenarios
 
 `TODO`
-
-The authors recognize that to efficiently manage QUIC streams, the time-sensitive flows need to be prioritized
 
 ## Reference
 
