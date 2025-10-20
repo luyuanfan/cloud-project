@@ -1,9 +1,10 @@
 - [QUIC: A UDP-Based Multiplexed and Secure Transport](https://datatracker.ietf.org/doc/rfc9000/)
 - [The QUIC Transport Protocol: Design and Internet-Scale Deployment](https://doi.org/10.1177/14614448251336438)
 - [pFabric: minimal near-optimal datacenter transport](https://doi.org/10.1145/2486001.2486031)
-- [Exploiting stream scheduling in QUIC: Performance assessment over wireless connectivity scenarios](https://doi.org/10.1016/j.adhoc.2024.103599)
+- [Flexible Priority-based Stream Schedulers in QUIC](https://doi.org/10.1145/3616394.3618267)
 
-QUIC is a transport-layer protocol that underlies the latest version of the Hypertext Transfer Protocol, HTTP/3. As a transport layer protocol, it describes a new way of how two endhosts can establish a connection and communicate over the Internet. Its main goal is to reduce communication latency. 
+QUIC is a transport-layer protocol that underlies the latest version of the Hypertext Transfer Protocol, HTTP/3. As a transport layer protocol, it describes a new way of how two endhosts can establish a connection and communicate over the Internet. Its main goal is to reduce communication latency.
+
 Launched in 2016 and standardized by IETF in 2021, QUIC is now used by major internet players like Meta, Google, Cloudflare, Alibaba, and Microsoft. As of early 2024, it's estimated to carry nearly half of all internet traffic across Europe, Latin America, and the United States. \[1\] \[2\]
 
 ## The QUIC Transport Protocol: Design and Internet-Scale Deployment
@@ -49,11 +50,15 @@ The paper points out that short flows in data centers are extremely latency-sens
     - When a new packet arrives and the buffer is full, if the incoming packet has lower priority than all buffered packets, it is dropped; else, the lowest priority packet in the buffer is dropped and replaced with the incoming packet.
 - Rate control: Initially sent at line-rate (maximum rate that the network interface can handle), and would reduce rate if persisting packet loss happens. 
 
-We take inspiration from assigning priorities to packets and want to bring this idea to TCP's newer counterpart — QUIC.
+We take inspiration from assigning priorities to packets and want to bring this idea to TCP's newer counterpart: QUIC.
 
-## Exploiting stream scheduling in QUIC: Performance assessment over wireless connectivity scenarios
+## Flexible Priority-based Stream Schedulers in QUIC
 
-Does something we want to do but it's in a wireless network type of setting. We care more about a typical datacenter setting with commodity nodes and such and such? 
+> Below are direct quotes from paper abstract (no ACM access given to the actual article)
+
+Exploiting the proposed approach, applications are able to set the required scheduling scheme, as well as the stream priorities. The feasibility of the proposed approach is validated through an extensive experiment campaign, which combines Docker containers and the ns-3 simulator to emulate different connectivity characteristics. The results evince that an appropriate stream scheduler can indeed yield lower delays for strict time-sensitive applications by up to 36% under unreliable conditions.
+
+We are happy to know our approach is feasible since someone has already done something similar with QUIC. This project focuses on a wireless communication setting in 5G systems and non-terrestrial networks. In contrast, our project focuses on a datacenter setting with wired commodity-node, where network conditions are generally more stable.
 
 ## Reference
 
@@ -61,6 +66,6 @@ Does something we want to do but it's in a wireless network type of setting. We 
 
 \[2\] Cisco (2024) The Internet and CDNs. Some Observations from a Network Perspective. Available at: https://2024.apricot.net/assets/files/APIC378/the-internet-and-cdn_1709097576.pdf 
 
-\[3\] Fernández, Fátima, Fátima Khan, Mihail Zverev, et al. 2024. “Exploiting Stream Scheduling in QUIC: Performance Assessment over Wireless Connectivity Scenarios.” Ad Hoc Networks 164 (November): 103599. https://doi.org/10.1016/j.adhoc.2024.103599.
+\[3\] Fátima Fernández, Mihail Zverev, Luis Diez, José R. Juárez, Anna Brunstrom, and Ramón Agüero. 2023. Flexible Priority-based Stream Schedulers in QUIC. In Proceedings of the Int'l ACM Symposium on Performance Evaluation of Wireless Ad Hoc, Sensor, & Ubiquitous Networks (PE-WASUN '23). Association for Computing Machinery, New York, NY, USA, 91–98. https://doi.org/10.1145/3616394.3618267
 
 \[4\]: RFC 9000 — “QUIC: A UDP-Based Multiplexed and Secure Transport” (IETF, 2021) and RFC 9114 — “HTTP/3” 
