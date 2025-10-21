@@ -4,7 +4,20 @@
 
 We recognizes that datacenter workloads are dominated by large numbers of short flows. These flows are more latency sensitive than long flows (e.g., google drive backup) because they tend to belong to more interactive tasks (e.g., a single webpage request). Therefore, reducing the flow completion time (FCT) of short flow is essential to improving overall application responsiveness and datacenter performance.
 
-To achieve this, we want to bring pFabric's scheduling logic into QUIC: a priority-based scheduling and dropping mechanism implemented at each switch on the network. 
+To achieve this, we want to bring pFabric's scheduling logic into QUIC: a priority-based scheduling and dropping mechanism implemented at each switch on the network. **Instead of focusing on flow scheduling, we focus on stream scheduling.**
+
+## Priority assessment
+
+Priority is high when the value is small. 
+We directly use flow size as the priority value. Larger flow size gets larger priority value. 
+
+## Priority Metadata System
+
+The metadata contains:
+- stream_id (integer): steam identifier
+- flow_size (integer): size of flow in bytes
+
+We use INET's packet tagging mechanism to attach metadata.
 
 ## Pseudocode
 The scheduling and dropping mechanism at switches is described as follows:
