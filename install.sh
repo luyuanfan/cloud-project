@@ -28,7 +28,7 @@ sed -i 's/WITH_TKENV=yes/WITH_TKENV=no/' configure.user
 sed -i 's/WITH_QTENV=yes/WITH_QTENV=no/' configure.user
 sed -i 's/WITH_OSG=yes/WITH_OSG=no/' configure.user
 ./configure
-make MODE=release core -j $(nproc)
+make MODE=release -j $(nproc)
 
 cd $OMNET_DIR
 
